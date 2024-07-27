@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {MenuItem} from '@/index.d.ts'
+import {MenuItem} from '@/index'
 import {ref} from 'vue'
 
 const {menu} = defineProps<{
@@ -9,7 +9,7 @@ const {menu} = defineProps<{
 const subMenu = ref<MenuItem[]>([])
 const activeMenu = ref<number | null>(null)
 const activeSubMenu = ref<number | null>(null)
-const handleClickMenu = (subMenuItems: MenuItemp[], activeIndex: number) => {
+const handleClickMenu = (subMenuItems: MenuItem[], activeIndex: number) => {
   if (activeMenu.value !== activeIndex) {
     activeSubMenu.value = null
   }

@@ -2,7 +2,7 @@
 import image from '../assets/logo.png'
 import {onMounted, ref} from 'vue'
 import NavMobile from '@/layouts/components/NavMobile.vue'
-import {MenuItem} from '@/index.d.ts'
+import {MenuItem} from '@/index'
 
 const img = ref(image)
 const showMenu = ref(false)
