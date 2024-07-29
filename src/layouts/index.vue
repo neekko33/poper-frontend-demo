@@ -104,6 +104,7 @@ onMounted(() => {
   // transform menu when submenu out of view
   const containers = document.querySelectorAll('.sub-container')
   observer = new IntersectionObserver((entries) => {
+    // TODO: bug-多次移动后会位移回去
     if (entries[0].intersectionRatio < 1) {
       const offset = entries[0].boundingClientRect.right - window.innerWidth
       const parentEle = entries[0].target.parentElement?.parentElement?.parentElement
