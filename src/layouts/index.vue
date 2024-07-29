@@ -98,11 +98,12 @@ const menu: MenuItem[] = [
     ]
   }
 ]
+let observer: IntersectionObserver | null = null
 
 onMounted(() => {
   // transform menu when submenu out of view
   const containers = document.querySelectorAll('.sub-container')
-  const observer = new IntersectionObserver((entries) => {
+  observer = new IntersectionObserver((entries) => {
     if (entries[0].intersectionRatio < 1) {
       const offset = entries[0].boundingClientRect.right - window.innerWidth
       const parentEle = entries[0].target.parentElement?.parentElement?.parentElement
@@ -112,7 +113,7 @@ onMounted(() => {
     }
   })
   containers.forEach(container => {
-    observer.observe(container)
+    (observer as IntersectionObserver).observe(container)
   })
 })
 
@@ -177,10 +178,13 @@ onMounted(() => {
         </label>
       </div>
     </div>
-
   </div>
   <div class="content max-w-[1100px] pt-24 px-5 mx-auto">
-    <router-view></router-view>
+    <router-view v-slot="{Component}">
+      <keep-alive include="List">
+        <component :is="Component"></component>
+      </keep-alive>
+    </router-view>
   </div>
 </template>
 

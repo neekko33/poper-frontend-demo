@@ -29,7 +29,6 @@ const handleLogin = () => {
     errors.value = err
   } else {
     // success login
-    console.log('login')
     router.push('/list')
   }
 }
@@ -65,8 +64,8 @@ const handleLogin = () => {
         <li v-for="(item, index) in errors" :key="index" class="text-[#e53935]">{{ item }}</li>
       </ul>
       <div class="form-group">
-        <label class="mr-2"><input class="text-[#16bfb7] ring-0" type="radio" value="parent" v-model="radio"/> 保護者</label>
-        <label><input class="text-[#16bfb7] outline-none" type="radio" value="Student" v-model="radio"/> 生徒</label>
+        <label class="mr-2"><input class="text-[#16bfb7] focus:ring-0" type="radio" value="parent" v-model="radio"/> 保護者</label>
+        <label><input class="text-[#16bfb7] focus:ring-0" type="radio" value="Student" v-model="radio"/> 生徒</label>
       </div>
       <div class="form-group">
         <label class="login-label" for="student-no">生徒番号</label>
@@ -78,7 +77,7 @@ const handleLogin = () => {
       </div>
       <div class="form-group">
         <label class="font-bold">
-          <input type="checkbox" class="text-[#16bfb7] rounded" v-model="showPassword">
+          <input type="checkbox" class="text-[#16bfb7] rounded focus:ring-0" v-model="showPassword">
           パスワードを表示
         </label>
       </div>

@@ -14,10 +14,13 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/list',
         name: 'list',
-        component: () => import('@/pages/List/index.vue')
+        meta: {
+          keepAlive: true
+        },
+        component: () => import('@/pages/List/List.vue')
       },
       {
-        path: '/detail',
+        path: '/detail/:id',
         name: 'detail',
         component: () => import('@/pages/Detail/index.vue')
       },
@@ -27,11 +30,16 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/pages/404.vue')
       }
     ]
-  },
+  }
 ]
 
 
 export default createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+  scrollBehavior(_, from) {
+    if (from.path === '/list') {
+      return {top: 0}
+    }
+  }
 })

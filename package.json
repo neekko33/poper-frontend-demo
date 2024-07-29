@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "video.js": "^8.16.1",
     "vue": "^3.4.31",
     "vue-router": "^4.4.0"
   },
