@@ -90,7 +90,7 @@ const handleScroll = () => {
             class="rounded-[50%] border fixed right-10 bottom-10 bg-amber-300 p-3 font-bold hover:bg-amber-400">Top
     </button>
   </div>
-  <div>Something goes wrong...</div>
+  <div v-else>Something goes wrong...Click <span @click="router.push('/list')">here</span> to go back.</div>
 </template>
 
 <style scoped>
