@@ -45,9 +45,9 @@ const removeTag = (tag: string) => {
   if (index !== -1) {
     selectedTags.value.splice(index, 1)
   }
-  if (selectedTags.value.length === 0) {
+  // if (selectedTags.value.length === 0) {
     emitUpdate()
-  }
+  // }
 }
 
 const emitUpdate = () => {
@@ -61,7 +61,7 @@ const emitUpdate = () => {
       <div class="flex border rounded-md flex-1 p-1 relative items-center">
         <div class="tags flex">
           <span v-for="tag in selectedTags" :key="tag"
-                class="inline-block bg-[#e0e0e0] py-1 px-2 mr-1 rounded text-nowrap">{{ tag }}<button
+                class="tag">{{ tag }}<button
               @click="removeTag(tag)" class="bg-none border-none cursor-pointer font-bold ml-1">×</button></span>
         </div>
         <input
@@ -93,7 +93,7 @@ const emitUpdate = () => {
     </div>
     <div class="tags-mobile hidden">
           <span v-for="tag in selectedTags" :key="tag" class="tag mt-2">{{ tag }}<button
-              @click="removeTag(tag)">×</button></span>
+              @click="removeTag(tag)" class="bg-none border-none cursor-pointer font-bold ml-1">×</button></span>
     </div>
   </div>
 </template>
@@ -102,6 +102,10 @@ const emitUpdate = () => {
 .suggestions {
   @apply absolute left-0 w-full max-h-[200px] overflow-y-auto list-none p-0 m-0 border border-t-0 rounded-b bg-white z-10;
   top: calc(100% + 1px);
+}
+
+.tag {
+  @apply inline-block bg-[#e0e0e0] py-1 px-2 mr-1 rounded text-nowrap
 }
 
 @media screen and (max-width: 800px) {

@@ -9,7 +9,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/login',
         name: 'login',
-        component: () => import('@/pages/Login.vue')
+        component: () => import('@/views/Login.vue')
       },
       {
         path: '/list',
@@ -17,12 +17,12 @@ const routes: RouteRecordRaw[] = [
         meta: {
           keepAlive: true
         },
-        component: () => import('@/pages/List.vue')
+        component: () => import('@/views/List.vue')
       },
       {
         path: '/detail/:id',
         name: 'detail',
-        component: () => import('@/pages/Detail.vue')
+        component: () => import('@/views/Detail.vue')
       },
       {
         path: '/:catchAll(.*)',

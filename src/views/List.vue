@@ -72,7 +72,7 @@ onActivated(() => {
           @update:modelValue="searchNews"
       />
     </div>
-    <div class="news-grid">
+    <div v-if="paginatedNews.length > 0" class="news-grid">
       <div v-for="article in paginatedNews" :key="article.id" class="news-item hover:shadow-xl cursor-pointer"
            @click="handleDetail(article.id)">
         <LazyImage
@@ -84,6 +84,9 @@ onActivated(() => {
         <div class="text-sm m-3 text-gray-400">Posted on {{ formatTime(article.updated_at) }}</div>
         <p>{{ article.description }}</p>
       </div>
+    </div>
+    <div v-else class="pt-10 w-full text-center text-xl text-gray-400">
+      No news found<br/>Please try other tags later.
     </div>
     <pagination :total-pages="totalPages" v-model="currentPage"/>
   </div>

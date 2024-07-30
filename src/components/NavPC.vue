@@ -7,12 +7,14 @@ defineProps<{
 }>()
 
 let observer: IntersectionObserver | null = null
+let parentObserver: IntersectionObserver | null = null
 
 onMounted(() => {
   const containers = document.querySelectorAll('.sub-container')
+  const parentContainers = document.querySelectorAll('.menu-container:has(.sub-container)')
+  // 观察子菜单是否超过视口，超过则位移
   observer = new IntersectionObserver((entries) => {
-    // TODO: bug-多次移动后会位移回去
-    if (entries[0].intersectionRatio < 1) {
+    if (entries[0].intersectionRatio < 1 && entries[0].intersectionRatio > 0) {
       const offset = entries[0].boundingClientRect.right - window.innerWidth
       const parentEle = entries[0].target.parentElement?.parentElement?.parentElement
       if (parentEle) {
@@ -23,11 +25,24 @@ onMounted(() => {
   containers.forEach(container => {
     (observer as IntersectionObserver).observe(container)
   }, {threshold: 0.1})
+
+  // 父菜单每次消失后清除位移
+  parentObserver = new IntersectionObserver((entries) => {
+    if (!entries[0].isIntersecting) {
+      ;(entries[0].target as HTMLElement).style.transform = ''
+    }
+  })
+  parentContainers.forEach(container => {
+    (parentObserver as IntersectionObserver).observe(container)
+  }, {threshold: 0.1})
 })
 
 onUnmounted(() => {
   if (observer) {
     observer.disconnect()
+  }
+  if (parentObserver) {
+    parentObserver.disconnect()
   }
 })
 
@@ -76,7 +91,7 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-@media only screen and (max-width:800px) {
+@media only screen and (max-width: 800px) {
   .nav-pc {
     display: none;
   }

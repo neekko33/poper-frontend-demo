@@ -9,16 +9,11 @@ import Player from 'video.js/dist/types/player'
 
 const route = useRoute()
 const router = useRouter()
-const article = ref<Article | null>(null)
+const article = ref<Article | null>(articles.find(article => article.id === route.params.id) || null)
 const container = ref<HTMLElement | null>(null)
 const player = ref<Player | null>(null)
 let showScroll = ref(false)
 let observer: IntersectionObserver | null = null
-
-const a = articles.find(article => article.id === route.params.id)
-if (a) {
-  article.value = a
-}
 
 onMounted(() => {
   if (article.value?.video_url) {
@@ -90,7 +85,10 @@ const handleScroll = () => {
             class="rounded-[50%] border fixed right-10 bottom-10 bg-amber-300 p-3 font-bold hover:bg-amber-400">Top
     </button>
   </div>
-  <div v-else>Something goes wrong...Click <span class="underline" @click="router.push('/list')">here</span> to go back.</div>
+  <div v-else class="w-full text-center text-xl font-bold text-gray-400 pt-10">Something goes wrong...<br/>Click <span
+      class="underline text-amber-400 font-bold cursor-pointer" @click="() => router.push('/list')">here</span> to go
+    back.
+  </div>
 </template>
 
 <style scoped>
