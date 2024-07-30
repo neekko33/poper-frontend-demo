@@ -1,10 +1,17 @@
-# Vue 3 + TypeScript + Vite
+# poper-frontend-demo
 
 ## Development
 
 ```shell
 pnpm install
 pnpm run dev
+```
+
+## Test
+
+```shell
+pnpm run test
+pnpm run coverage
 ```
 
 ## Build
