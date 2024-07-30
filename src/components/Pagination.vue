@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const model = defineModel()
+import {ModelRef} from 'vue'
+
+const model = defineModel<number>() as ModelRef<number>
 const {totalPages} = defineProps<{
   totalPages: number,
 }>()
@@ -21,7 +23,7 @@ const prevPage = () => {
 </script>
 
 <template>
-  <div class="pagination" v-if="totalPages > 1">
+  <div class="pagination" v-if="model && totalPages > 1">
     <button class="flex-1 border rounded-md font-bold bg-amber-300 cursor-pointer disabled:opacity-70"
             @click="prevPage" :disabled="model === 1"> << Previous
     </button>
