@@ -56,56 +56,28 @@ onUnmounted(() => {
     observer.disconnect()
   }
 })
+
 </script>
 <template>
-  <div class="lazy-image-container" ref="container">
+  <div class="relative w-full h-0 pb-[56.25%] bg-gray-200" ref="container">
     <img
         :src="loadedSrc"
         :alt="alt"
         :class="{ 'lazy-image': true, 'lazy-image-loaded': isLoaded }"
         @load="onImageLoaded"
     />
-    <div v-if="!isLoaded" class="lazy-image-placeholder">
-      <!-- 可以在这里添加加载中的占位符,如加载动画 -->
+    <div v-if="!isLoaded" class="absolute top-0 left-0 w-full h-full flex justify-center items-center text-[#666]">
       Loading...
     </div>
   </div>
 </template>
 
 <style scoped>
-.lazy-image-container {
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: 56.25%; /* 16:9 宽高比,可以根据需要调整 */
-  background-color: #f0f0f0; /* 占位符背景色 */
-}
-
 .lazy-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+  @apply absolute top-0 left-0 w-full h-full opacity-0 object-cover transition-opacity duration-300 ease-in-out
 }
 
 .lazy-image-loaded {
-  opacity: 1;
-}
-
-.lazy-image-placeholder {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #666;
-  font-size: 14px;
+  @apply opacity-100
 }
 </style>

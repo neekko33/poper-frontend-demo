@@ -67,7 +67,7 @@ const handleCLickSubMenu = (activeIndex: number) => {
 <style scoped>
 @media only screen and (max-width: 800px) {
   .header-link-area {
-    display: flex;
+    @apply flex
   }
 }
 
@@ -92,6 +92,6 @@ const handleCLickSubMenu = (activeIndex: number) => {
 }
 
 .active-submenu .caret-right {
-  transform: rotate(90deg);
+  @apply rotate-90
 }
 </style>

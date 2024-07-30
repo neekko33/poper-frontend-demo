@@ -4,12 +4,12 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     redirect: '/login',
-    component: () => import('@/layouts/index.vue'),
+    component: () => import('@/layouts/Layout.vue'),
     children: [
       {
         path: '/login',
         name: 'login',
-        component: () => import('@/pages/Login/index.vue')
+        component: () => import('@/pages/Login.vue')
       },
       {
         path: '/list',
@@ -17,17 +17,17 @@ const routes: RouteRecordRaw[] = [
         meta: {
           keepAlive: true
         },
-        component: () => import('@/pages/List/List.vue')
+        component: () => import('@/pages/List.vue')
       },
       {
         path: '/detail/:id',
         name: 'detail',
-        component: () => import('@/pages/Detail/index.vue')
+        component: () => import('@/pages/Detail.vue')
       },
       {
-        path: '/404',
+        path: '/:catchAll(.*)',
         name: '404',
-        component: () => import('@/pages/404.vue')
+        component: () => import('@/layouts/404.vue')
       }
     ]
   }

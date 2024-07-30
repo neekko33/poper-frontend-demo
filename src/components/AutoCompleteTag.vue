@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {ref, computed, defineEmits} from 'vue'
-import tags from '@/dataset/tags.json'
+import {ref, computed} from 'vue'
 
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps<{
+  data: string[]
   placeholder: string,
   maxTags: number,
 }>()
@@ -11,7 +11,7 @@ const props = defineProps<{
 const inputValue = ref('')
 const selectedTags = ref<string[]>([])
 const showSuggestions = ref(false)
-const allTags = ref(JSON.parse(tags) as string[])
+const allTags = ref(props.data)
 
 const filteredSuggestions = computed(() => {
   if (!inputValue.value) return []
@@ -56,15 +56,16 @@ const emitUpdate = () => {
 </script>
 
 <template>
-  <div class="auto-complete-tag">
+  <div class="relative w-full">
     <div class="flex">
       <div class="flex border rounded-md flex-1 p-1 relative items-center">
         <div class="tags flex">
-          <span v-for="tag in selectedTags" :key="tag" class="tag">{{ tag }}<button
-              @click="removeTag(tag)">×</button></span>
+          <span v-for="tag in selectedTags" :key="tag"
+                class="inline-block bg-[#e0e0e0] py-1 px-2 mr-1 rounded text-nowrap">{{ tag }}<button
+              @click="removeTag(tag)" class="bg-none border-none cursor-pointer font-bold ml-1">×</button></span>
         </div>
         <input
-            class="focus:ring-0"
+            class="focus:ring-0 flex-1 border-none"
             v-model="inputValue"
             @input="onInput"
             @keydown.enter.prevent="addTag"
@@ -74,6 +75,7 @@ const emitUpdate = () => {
         <ul v-if="showSuggestions" class="suggestions">
           <li
               v-for="suggestion in filteredSuggestions"
+              class="p-2 cursor-pointer hover:bg-gray-100"
               :key="suggestion"
               @click="selectSuggestion(suggestion)"
           >
@@ -97,57 +99,9 @@ const emitUpdate = () => {
 </template>
 
 <style scoped>
-.auto-complete-tag {
-  position: relative;
-  width: 100%;
-}
-
-input {
-  flex: 1;
-  border: none;
-}
-
 .suggestions {
-  position: absolute;
-  top: calc(100% + 2px);
-  left: 0;
-  width: 100%;
-  max-height: 200px;
-  overflow-y: auto;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  border: 1px solid #ccc;
-  border-top: none;
-  border-radius: 0 0 4px 4px;
-  background-color: white;
-  z-index: 1;
-}
-
-.suggestions li {
-  padding: 8px;
-  cursor: pointer;
-}
-
-.suggestions li:hover {
-  background-color: #f0f0f0;
-}
-
-.tag {
-  display: inline-block;
-  background-color: #e0e0e0;
-  padding: 4px 8px;
-  margin-right: 4px;
-  border-radius: 4px;
-  text-wrap: nowrap;
-}
-
-.tag button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  margin-left: 4px;
+  @apply absolute left-0 w-full max-h-[200px] overflow-y-auto list-none p-0 m-0 border border-t-0 rounded-b bg-white z-10;
+  top: calc(100% + 1px);
 }
 
 @media screen and (max-width: 800px) {

@@ -3,7 +3,7 @@ import {onMounted, onUnmounted, ref} from 'vue'
 import {onBeforeRouteLeave, useRoute, useRouter} from 'vue-router'
 import videojs from 'video.js'
 import 'video.js/dist/video-js.css'
-import {formatTime} from '@/utils/index.ts'
+import {formatTime} from '@/utils/utils.ts'
 import articles, {Article} from '@/dataset/articles.ts'
 import Player from 'video.js/dist/types/player'
 
@@ -90,13 +90,14 @@ const handleScroll = () => {
             class="rounded-[50%] border fixed right-10 bottom-10 bg-amber-300 p-3 font-bold hover:bg-amber-400">Top
     </button>
   </div>
-  <div v-else>Something goes wrong...Click <span @click="router.push('/list')">here</span> to go back.</div>
+  <div v-else>Something goes wrong...Click <span class="underline" @click="router.push('/list')">here</span> to go back.</div>
 </template>
 
 <style scoped>
 @media only screen and (max-width: 800px) {
   #videoPlayer {
-    min-height: 200px;
+    min-height: 0;
+    height: 23vh;
   }
 }
 </style>

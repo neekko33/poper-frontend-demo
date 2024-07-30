@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ref} from 'vue'
 import {useRouter} from 'vue-router'
-import LoginCard from './components/LoginCard.vue'
+import LoginCard from '../components/LoginCard.vue'
 import lineButton from '@/assets/btn_base.png'
 import lineFriend from '@/assets/ja.png'
 
